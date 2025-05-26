@@ -10,7 +10,7 @@ int main()
     {
         cin >> v[i];
     }
-    int maxi = 0;
+    int maxi = 1;
     int c = 1;
     for (int i = 0; i < t - 1; ++i)
     {
