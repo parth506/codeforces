@@ -11,22 +11,14 @@ int main()
 
     for (int i = 0; i < n; ++i)
     {
-        if (y[i] == x[i] && y[i] != 'z')
-        {
-            z[i] = y[i] + 1;
-        }
-        else if (y[i] == x[i] && y[i] == 'z')
-        {
-            z[i] = y[i];
-        }
-        else if (y[i] == 'b' && x[i] == 'a')
+        if (y[i] > x[i])
         {
             cout << -1 << endl;
             return 0;
         }
-        else if (y[i] != x[i])
+        else
         {
-            z[i] = y[i];
+            z[i] = min(x[i], y[i]);
         }
     }
     cout << z << endl;
