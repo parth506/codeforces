@@ -11,9 +11,13 @@ int main()
 
     for (int i = 0; i < n; ++i)
     {
-        if (y[i] == x[i])
+        if (y[i] == x[i] && y[i] != 'z')
         {
             z[i] = y[i] + 1;
+        }
+        else if (y[i] == x[i] && y[i] == 'z')
+        {
+            z[i] = y[i];
         }
         else if (y[i] == 'b' && x[i] == 'a')
         {
