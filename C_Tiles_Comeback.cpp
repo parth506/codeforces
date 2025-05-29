@@ -14,36 +14,25 @@ int main()
         {
             cin >> v[i];
         }
-        int first = v[0];
-        int last = v[n - 1];
-        int fc = 0, lc = 0;
-        int c = count(v.begin(), v.end(), first);
-        if (first == last)
-        {
-            if (c >= k)
-            {
+        int left = 0, right = 0, i = 0, j = n - 1;
+        int k_left = k, k_right = k;
 
-                cout << "YES\n";
-            }
+        if (v[i] == v[j])
+        {
+            k_left = k / 2;
+            k_right = k - k_left;
+        }
+        for (; i < n && left < k_left; ++i)
+        {
+            if (v[i] == v[0])
+                ++left;
+        }
+        for (; j >= 0 && right < k_right; --j)
+        {
+            if (v[j] == v[n - 1])
+                ++right;
         }
 
-        else
-        {
-            for (int i = 0; i <= n / 2; ++i)
-            {
-                if (v[i] == first)
-                    ++fc;
-                if (v[n - i - i] == last)
-                    ++lc;
-            }
-            if (fc >= k && lc >= k)
-            {
-                cout << "YES\n";
-            }
-            else
-            {
-                cout << "NO\n";
-            }
-        }
+        (i - 1 < j + 1) ? cout << "YES\n" : cout << "NO\n";
     }
 }
