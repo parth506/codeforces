@@ -1,7 +1,10 @@
 {
-    "files.associations": {
-        "iostream": "cpp",
-        "random": "cpp",
-        "cmath": "cpp"
-    }
+  "files.associations": {
+    "iostream": "cpp",
+    "random": "cpp",
+    "cmath": "cpp",
+    "future": "cpp",
+    "system_error": "cpp",
+    "regex": "cpp"
+  }
 }
