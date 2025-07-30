@@ -3,25 +3,22 @@
 #include <queue>
 using namespace std;
 
-void bfs(int start, const vector<vector<int>> &adj, vector<bool> &visited)
+void bfs(int s, vector<vector<int>> &adj, vector<int> &vis)
 {
     queue<int> q;
-    q.push(start);
-    visited[start] = true;
-
+    q.push(s);
+    vis[s] = 1;
     while (!q.empty())
     {
         int node = q.front();
         q.pop();
         cout << node << " ";
-
-        for (int neighbor : adj[node])
+        for (auto it : adj[node])
         {
-            if (!visited[neighbor])
+            if (!vis[it])
             {
-                // visited[neighbor] = true;
-                // q.push(neighbor);
-                bfs(neighbor, adj, visited);
+                vis[it] = 1;
+                q.push(it);
             }
         }
     }
@@ -43,7 +40,7 @@ int main()
         adj[v].push_back(u); // For undirected graph
     }
 
-    vector<bool> visited(n + 1, false);
+    vector<int> visited(n + 1, 0);
     int start;
     // cout << "Enter starting node: ";
     cin >> start;

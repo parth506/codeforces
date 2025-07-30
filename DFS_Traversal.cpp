@@ -6,11 +6,11 @@ void dfs(int node, const vector<vector<int>> &adj, vector<bool> &visited)
 {
     visited[node] = true;
     cout << node << " ";
-    for (int neighbor : adj[node])
+    for (auto it : adj[node])
     {
-        if (!visited[neighbor])
+        if (!visited[it])
         {
-            dfs(neighbor, adj, visited);
+            dfs(it, adj, visited);
         }
     }
 }
