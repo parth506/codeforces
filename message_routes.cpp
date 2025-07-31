@@ -1,19 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(vector<vector<int>> &adj, vector<int> &vis, int node, vector<int> &parent)
-{
-    vis[node] = 1;
-
-    for (auto it : adj[node])
-    {
-        if (!vis[it])
-        {
-            parent[it] = node;
-            dfs(adj, vis, it, parent);
-        }
-    }
-}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -29,60 +16,46 @@ int main()
         adj[a].push_back(b);
         adj[b].push_back(a);
     }
-    vector<int> vis(n + 1, 0);
-    // vector<vector<int>> ans;
-    vector<int> parent(n + 1);
-    parent[1] = -1;
-    int cnt = 0;
-    for (int i = 1; i <= n; ++i)
+
+    vector<int> vis(n + 1, 0), parent(n + 1, -1);
+    queue<int> q;
+    q.push(1);
+    vis[1] = 1;
+
+    while (!q.empty())
     {
+        int node = q.front();
+        q.pop();
 
-        if (!vis[i])
+        for (auto it : adj[node])
         {
-            // res.push_back(i);
-
-            dfs(adj, vis, i, parent);
-
-            cnt++;
+            if (!vis[it])
+            {
+                vis[it] = 1;
+                parent[it] = node;
+                q.push(it);
+            }
         }
     }
-    int a = n;
-    vector<int> res;
-    for (int i = 0; i < parent.size(); ++i)
-    {
-        res.push_back(a);
-        n = parent[a];
-    }
-    reverse(res.begin(), res.end());
-    // for (int i = 0; i < res.size() - 1; ++i)
-    // {
-    //     ans.push_back({res[i], res[i + 1]});
-    // }
 
-    // if (m >= n - 1)
-    // {
-    //     cout << 0 << endl;
-    //     return 0;
-    // }
-    if (cnt > 1)
+    if (!vis[n])
     {
         cout << "IMPOSSIBLE" << endl;
         return 0;
     }
-    else
+    vector<int> path;
+    // path tracing
+    for (int v = n; v != -1; v = parent[v])
     {
-        cout << res.size() << endl;
-        for (int i = 0; i < res.size(); ++i)
-        {
-            cout << res[i] << " ";
-        }
-        cout << endl;
+        path.push_back(v);
     }
-    // cout << cnt - 1 << endl;
-    // for (int i = 0; i < ans.size(); ++i)
-    // {
-    //     cout << ans[i][0] << " " << ans[i][1] << endl;
-    // }
+    reverse(path.begin(), path.end());
+    cout << path.size() << endl;
+    for (int v : path)
+    {
+        cout << v << " ";
+    }
+    cout << endl;
 
-    // Your code here for the "Building Roads"
+    return 0;
 }
