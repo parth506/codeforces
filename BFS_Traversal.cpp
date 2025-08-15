@@ -1,24 +1,23 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include <vector>
 #include <queue>
 using namespace std;
-
-void bfs(int s, vector<vector<int>> &adj, vector<int> &vis)
+void bfs(int i, vector<vector<int>> &adj, vector<int> &vis)
 {
     queue<int> q;
-    q.push(s);
-    vis[s] = 1;
+    q.push(i);
+    vis[i] = 1;
     while (!q.empty())
     {
-        int node = q.front();
+        auto it = q.front();
         q.pop();
-        cout << node << " ";
-        for (auto it : adj[node])
+        cout << it << " ";
+        for (auto i : adj[it])
         {
-            if (!vis[it])
+            if (!vis[i])
             {
-                vis[it] = 1;
-                q.push(it);
+                vis[i] = 1;
+                q.push(i);
             }
         }
     }
@@ -27,27 +26,18 @@ void bfs(int s, vector<vector<int>> &adj, vector<int> &vis)
 int main()
 {
     int n, m;
-    // cout << "Enter number of nodes and edges: ";
     cin >> n >> m;
-
     vector<vector<int>> adj(n + 1);
-    //
     for (int i = 0; i < m; ++i)
     {
-        int u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u); // For undirected graph
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
     }
 
-    vector<int> visited(n + 1, 0);
     int start;
-    // cout << "Enter starting node: ";
     cin >> start;
-
-    // cout << "BFS Traversal: ";
-    bfs(start, adj, visited);
-    cout << endl;
-
-    return 0;
+    vector<int> vis(n + 1, 0);
+    bfs(start, adj, vis);
 }

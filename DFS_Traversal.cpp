@@ -1,35 +1,34 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include <vector>
 using namespace std;
 
-void dfs(int node, const vector<vector<int>> &adj, vector<bool> &visited)
+void dfs(vector<vector<int>> &adj, int i, vector<int> &vis)
 {
-    visited[node] = true;
-    cout << node << " ";
-    for (auto it : adj[node])
+    int n = adj.size();
+    vis[i] = 1;
+    cout << i << " ";
+    for (auto it : adj[i])
     {
-        if (!visited[it])
+        if (!vis[it])
         {
-            dfs(it, adj, visited);
+            dfs(adj, it, vis);
         }
     }
 }
-
 int main()
 {
-    int n, m;
-    cin >> n >> m;
+    int n, d;
+    cin >> n >> d;
     vector<vector<int>> adj(n + 1);
-    for (int i = 0; i < m; ++i)
+    for (int i = 0; i < d; ++i)
     {
-        int u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u); // For undirected graph
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
     }
-    vector<bool> visited(n + 1, false);
     int start;
     cin >> start;
-    dfs(start, adj, visited);
-    cout << endl;
+    vector<int> vis(n + 1);
+    dfs(adj, start, vis);
 }
