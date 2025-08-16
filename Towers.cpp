@@ -8,23 +8,16 @@ int main()
     vector<int> v(n);
     for (int i = 0; i < n; ++i)
         cin >> v[i];
-    queue<int> q; // pq
-    q.push(v[0]);
-    int i = 1;
-    while (i < n)
+    multiset<int> ms;
+    for (auto it : v)
     {
-        int a = q.front();
-        q.pop();
-        if (v[i] > a)
+        auto x = ms.upper_bound(it);
+        // cout << '(' << *x << ')';
+        if (x != ms.end())
         {
-            q.push(v[i]);
-            q.push(a);
+            ms.erase(x);
         }
-        else
-        {
-            q.push(v[i]);
-        }
-        ++i;
+        ms.insert(it);
     }
-    cout << q.size();
+    cout << ms.size() << endl;
 }
